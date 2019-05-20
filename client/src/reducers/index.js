@@ -5,15 +5,21 @@ import {
   REMOVE_ONE_ITEM
 } from "../actions";
 const initialState = {
-  phones: []
+  phones: [],
+  loading: false
 };
 
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PHONES:
-      state.loading = false;
       return {
-        phones: action.phones
+        phones: action.phones,
+        loading: false
+      };
+    case "LOADING":
+      return {
+        ...state,
+        loading: true
       };
     case REMOVE_ITEM:
       return {

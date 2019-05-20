@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactLoading from "react-loading";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
@@ -14,7 +15,13 @@ class Cart extends Component {
   }
 
   render() {
-    const { phones, removeFromCart, onAddItem, onRemoveItem } = this.props;
+    const {
+      phones,
+      removeFromCart,
+      onAddItem,
+      onRemoveItem,
+      loading
+    } = this.props;
 
     function calculateTotal(items) {
       return items.reduce((accumulator, item) => {
@@ -22,19 +29,32 @@ class Cart extends Component {
       }, 0);
     }
 
+    // console.log("loading", loading);
     return (
       <div className="list-phones">
         <div className="text-center title">
           <h1>
-            Welcome To The White Wolf's <i class="fab fa-wolf-pack-battalion" />{" "}
-            Phones Cart App!!!
+            Welcome To The White Wolf's{" "}
+            <i className="fab fa-wolf-pack-battalion" /> Phones Cart App!!!
           </h1>
           <h2>
             The best deals are waiting for you ...
-            <i class="fas fa-shopping-cart" />
+            <i className="fas fa-shopping-cart" />
           </h2>
         </div>
         <br />
+        {loading && (
+          <div>
+            {/* //className="loading text-center"> */}
+            <ReactLoading
+              className="loading text-center"
+              type="spokes"
+              color="#2c97b8"
+              height={75}
+              width={75}
+            />
+          </div>
+        )}
         {phones && phones.length > 0 ? (
           <ol className="phone-list">
             {phones.map(phone => (
@@ -78,6 +98,7 @@ class Cart extends Component {
                   onClick={() => removeFromCart(phone.id)}
                   className="phone-remove"
                 >
+                  <i className="fas fa-trash-alt black" />
                   Remove
                 </button>
               </li>
@@ -88,22 +109,24 @@ class Cart extends Component {
           <h1 className="text-center">
             The Cart is Empty :(
             <br />
-            Refresh the Page!!!
+            Refresh the Page and wait 3 Seconds!!!
           </h1>
         )}
+        <br />
         <footer>
           <b>
             All rights reserved. &copy; Ioan Zicu{" "}
-            <i class="fab fa-wolf-pack-battalion" />
+            <i className="fab fa-wolf-pack-battalion" />
           </b>
         </footer>
       </div>
     );
   }
 }
+
 function mapStateToProps(state) {
-  const { phones } = state;
-  return { phones };
+  const { phones, loading } = state;
+  return { phones, loading };
 }
 
 function mapDispatchToProps(dispatch) {

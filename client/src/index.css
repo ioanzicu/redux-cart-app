@@ -105,25 +105,33 @@ body,
 }
 
 .phone-remove {
-  padding-left: 20px;
   align-self: center;
-  width: 32px;
-  height: 32px;
+  width: 45px;
+  height: 30px;
   background-color: transparent;
-  background-image: url("./icons/cancel.svg");
   background-size: 100% 100%;
   border: 0;
-  color: black;
   font-size: 0;
   vertical-align: middle;
   cursor: pointer;
   outline: none;
   margin-left: 4%;
 }
+.black {
+  color: rgb(44, 43, 43);
+  font-size: 1.5rem;
+}
+
+.loading {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
 
 /* Footer */
 footer {
-  padding: 15px;
+  padding: 1rem;
   font-size: 18px;
   background: #2c97b8;
   color: white;
